@@ -16,10 +16,11 @@ jobs:
         with:
           cache: "pip"
       - name: Install pypa/build
-        run: >-
-          python3 -m pip install --user --upgrade
-          build
-          twine>=6.2.0
+        run: |
+          python3 -m pip install --user pipx
+          pipx install --upgrade build twine
+          build --version
+          twine --version
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Check the distribution files with `twine`
