@@ -19,7 +19,7 @@ jobs:
         run: >-
           python3 -m pip install --user
           build
-          twine
+          twine>=6.2.0
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Check the distribution files with `twine`
