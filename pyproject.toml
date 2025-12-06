@@ -60,6 +60,10 @@ Pygments = ">=2.13.0"  # for code-block highlighting
 sphinx = "*"
 sphinx-autobuild = "*"
 
+[tool.poetry.group.build.dependencies]
+build = "*"
+twine = "*"
+
 [build-system]
 requires = ["poetry-core==2.2.1"]
 build-backend = "poetry.core.masonry.api"

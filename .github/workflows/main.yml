@@ -15,18 +15,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           cache: "pip"
-      - name: Install pypa/build
-        run: |
-          python3 -m pip upgrade
-          python3 -m pip install --user --upgrade build twine
-          build --version
-          twine --version
+      - name: Install poetry
+        run: python3 -m pip install poetry==2.2.1
+      - name: Install build dependencies
+        run: poetry install --only build
       - name: Build a binary wheel and a source tarball
-        run: python3 -m build
+        run: poetry run python -m build
       - name: Check the distribution files with `twine`
-        run: |
-          twine --version
-          twine check --strict dist/*
+        run: poetry run twine check --strict dist/*
       - name: Upload artifact
         id: artifact-upload-step
         uses: actions/upload-artifact@v4
