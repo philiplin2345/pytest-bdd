@@ -23,7 +23,7 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: python3 -m build
       - name: Check the distribution files with `twine`
-        run: >-
+        run: |
           twine --version
           twine check --strict dist/*
       - name: Upload artifact
