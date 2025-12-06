@@ -18,7 +18,7 @@ jobs:
       - name: Install pypa/build
         run: |
           python3 -m pip install --user pipx
-          pipx install --upgrade build twine
+          pipx install build@latest twine@latest
           build --version
           twine --version
       - name: Build a binary wheel and a source tarball
