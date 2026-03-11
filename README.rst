@@ -1260,7 +1260,7 @@ Let's look at a concrete example; let's say you have a class ``Wallet`` that has
 
     # contents of wallet.py
 
-    import dataclass
+    from dataclasses import dataclass
 
     @dataclass
     class Wallet:
@@ -1287,6 +1287,7 @@ You can use pytest-factoryboy to automatically create model fixtures for this cl
         class Meta:
             model = Wallet
 
+        verified = False
         amount_eur = 0
         amount_usd = 0
         amount_gbp = 0
@@ -1305,9 +1306,7 @@ Now we can define a function ``generate_wallet_steps(...)`` that creates the ste
     import re
     from dataclasses import fields
 
-    import factory
-    import pytest
-    from pytest_bdd import given, when, then, scenarios, parsers
+    from pytest_bdd import given, then, parsers
 
 
     def generate_wallet_steps(model_name="wallet", stacklevel=1):
@@ -1338,7 +1337,7 @@ Now we can define a function ``generate_wallet_steps(...)`` that creates the ste
                 parsers.parse(f"I should have {{value:d}} {currency.upper()} in my {human_name}"),
                 stacklevel=stacklevel,
             )
-            def _(value: int, _currency=currency, _model_name=model_name) -> None:
+            def _(request, value: int, _currency=currency, _model_name=model_name) -> None:
                 wallet = request.getfixturevalue(_model_name)
                 assert getattr(wallet, f"amount_{_currency}") == value
 
