@@ -50,7 +50,7 @@ pipeline {
         stage('Type Checking (mypy)') {
             steps {
                 sh '''
-                    source .venv/bin/activate
+                    . .venv/bin/activate
                     tox -e mypy
                 '''
             }
@@ -59,8 +59,8 @@ pipeline {
         stage('Test with Tox') {
             steps {
                 sh '''
-                    source .venv/bin/activate
-                    // Testing using Python 3.10 tox factor as an example
+                    . .venv/bin/activate
+                    # Testing using Python 3.10 tox factor as an example
                     tox run-parallel -f py3.10 --parallel 4 --installpkg dist/*.whl
                 '''
             }
