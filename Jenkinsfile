@@ -1,9 +1,9 @@
 pipeline {
-    // We use a docker agent with Python 3.10. 
+    // We use a docker agent with Python 3.10.
     // You can also use 'agent any' if your Jenkins server has Python 3.9+ directly installed.
     agent {
-        docker { 
-            image 'python:3.10' 
+        docker {
+            image 'python:3.10'
             args '-u root:root' // Needed for some Jenkins setups to have permission to workspace
         }
     }
